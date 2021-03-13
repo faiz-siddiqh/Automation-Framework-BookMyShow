@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke TestSuite">
+	<test name="SignIn Test" parallel="false">
+
+		<!-- <packages> <package name=" "></package> to execute a package with 
+			many classes </packages> -->
+		<classes>
+			<class name="homepageTest.SignInTestCases"></class>
+
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,49 @@
+<elements>
+
+	<!-- Home Page -->
+
+	<element name="homepage-personalisedUpdates-alert" locator="//div[@class='wzrk-alert-heading']"/>	
+	<element name="homepage-NotNow-button" locator="//button[@id='wzrk-cancel']"/>
+		
+	<element name="homepage-SelectCity" locator="//span[@class='sc-eEieub jpadjB'][contains(text(),'CITY')]"/>
+	
+	
+	<!-- Sign In Module -->
+	<element name="homepage-SignIn-Button" locator="//div[@class='sc-fQejPQ jWuMjc']"/>
+	<element name="SignIn-Get_Started" locator="//div[@class='sc-jKJlTe geqsna']"/>
+	<element name="SignIn-ContinueWithGoogle" locator="//div[contains(text(),'Continue with Google')]"/>
+	<element name="SignIn-Google" locator="//span[contains(text(),'Sign in')]"/>
+	<element name="SignIn-Close-Btn" locator="//div[@class='sc-hMqMXs kiiMpR']"/>
+	<element name="SignIn-Email" locator="//input[@id='identifierId']"/>
+	
+	<!--  <element name="SignIn-Next-btn" locator="//span[contains(text(),'Next')]"/>-->
+	<element name="SignIn-Next-btn" locator="//div[@id='identifierNext']"/>
+	<element name="SignIn-Welcome-Page" locator="//span[contains(text(),'Welcome')]"/>
+	<element name="SignIn-Error-Message" locator="//div[@class='o6cuMc']"/>
+	<element name="SignIn-PasswordError-Message1" locator="//div[@jsname='B34EJ']//span"/>
+	<element name="SignIn-PasswordError-Message" locator="//div[@jsname='B34EJ']"/>
+	
+	<element name="SignIn-Password" locator="//input[@type='password']"/>
+	
+	
+	<!-- Error/Warning Messages -->
+	
+	<element name="SignIn-Warning-ActualMessage" locator="Enter an email or phone number"/>
+	<element name="SignIn-Error-ActualMessage" locator="Couldn't find your Google Account"/>
+	<element name="SignIn-PasswordError-ActualMessage" locator="Wrong password. Try again or click ‘Forgot password’ to reset it."/>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+</elements>
