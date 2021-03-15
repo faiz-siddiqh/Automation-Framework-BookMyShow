@@ -143,13 +143,17 @@ public class BaseUtils {
 		}
 
 		public static void cleanUpOnFailure() {
-			common.logInfo("This Test Step failed, Capturing Screenshot.");
-			String screenshotPath = BaseUtils.Screenshot.takeScreenshot();
 
-			test.log(LogStatus.FAIL, "Test Failed", screenshotPath);
-			driver.quit();
-			BaseUtils.common.getExtentReport().endTest(test);
-			BaseUtils.common.getExtentReport().flush();
+			if (driver != null) {
+				cleanUp();
+			}
+//			common.logInfo("This Test failed.Capturing Screenshot.");
+//			String screenshotPath = BaseUtils.Screenshot.takeScreenshot();
+//
+//			test.log(LogStatus.FAIL, "Test Failed", screenshotPath);
+//			driver.quit();
+//			BaseUtils.common.getExtentReport().endTest(test);
+//			BaseUtils.common.getExtentReport().flush();
 
 		}
 
@@ -168,14 +172,6 @@ public class BaseUtils {
 			String screenshotPath = BaseUtils.Screenshot.takeScreenshot();
 			driver.quit();
 			test.log(LogStatus.PASS, "Test Passed", screenshotPath);
-			BaseUtils.common.getExtentReport().endTest(test);
-			BaseUtils.common.getExtentReport().flush();
-		}
-
-		public static void cleanUpOnSkip() {
-			String screenshotPath = BaseUtils.Screenshot.takeScreenshot();
-			BaseUtils.common.getDriver().quit();
-			test.log(LogStatus.SKIP, "Test Skipped", screenshotPath);
 			BaseUtils.common.getExtentReport().endTest(test);
 			BaseUtils.common.getExtentReport().flush();
 		}
@@ -257,14 +253,15 @@ public class BaseUtils {
 	}
 
 	public static class testData {
-		private static XSSFWorkbook ExcelWBook;
+		public static XSSFWorkbook ExcelWBook;
 		private static XSSFSheet ExcelWSheet;
+		public static String filePath;
 
 		public static void setTestFile(String fileName) {
 			try {
 				// Open the Excel file
-				FileInputStream ExcelFile = new FileInputStream(
-						System.getProperty("user.dir") + "//ExecutionFiles//Run//" + fileName + ".xlsx");
+				filePath = System.getProperty("user.dir") + "//ExecutionFiles//Run//" + fileName + ".xlsx";
+				FileInputStream ExcelFile = new FileInputStream(filePath);
 
 				// Access the excel data sheet
 				ExcelWBook = new XSSFWorkbook(ExcelFile);
@@ -272,6 +269,11 @@ public class BaseUtils {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+
+		public static XSSFWorkbook getExcelWorkBook() {
+
+			return ExcelWBook;
 		}
 
 		public static String getTestData(String testVariable) {
@@ -418,7 +420,7 @@ public class BaseUtils {
 //				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 //			}
 //		});
-			driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
 
 		} catch (Exception e) {
 			common.logInfo("WebPage took more time to Load.");
@@ -640,12 +642,18 @@ public class BaseUtils {
 			}
 		} catch (Exception e) {
 			common.logInfo(e.getMessage());
-//			driver.quit();
-//			extentreport.endTest(test);
-//			extentreport.flush();
 			common.cleanUp();
 		}
 
+	}
+
+	public static boolean isElementPresentAndClickable(WebElement element) {
+
+		if (element.isDisplayed() && element.isEnabled()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static void clickAndWait(WebElement element, String message) {
@@ -715,11 +723,38 @@ public class BaseUtils {
 			Actions action = new Actions(driver);
 
 			action.dragAndDropBy(sliderElement, xOffset, yOffset).perform();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		} catch (Exception e) {
 			common.logInfo(e.getMessage());
 			common.cleanUp();
 		}
+	}
+
+	public static void scrollToView(int offset) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0," + offset + ")", "");
+			common.logInfo(" Scroll Down");
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			common.logInfo("Unable to Scroll Down");
+			common.cleanUp();
+		}
+	}
+
+	public static void scrollToView(WebElement element) {
+
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView();", element);
+			common.logInfo(" Scroll Down");
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			common.logInfo("Unable to Scroll Down");
+			common.cleanUp();
+		}
+
 	}
 
 	public static void selectFromDropdown(WebElement element, String textToBeSelected) {

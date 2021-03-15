@@ -9,4 +9,9 @@
 
 		</classes>
 	</test>
+	<test name="Movies Test" parallel="false">
+		<classes>
+			<class name="homepageTest.MoviesTestCases"></class>
+		</classes>
+	</test>
 </suite>

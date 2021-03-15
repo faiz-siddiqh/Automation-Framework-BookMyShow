@@ -12,16 +12,13 @@ import core.BaseUtils;
 import core.HomePage_Util;
 import core.SignIn_Util;
 
-
-
-
 public class SignInTestCases {
 	public static HomePage_Util homepage = new HomePage_Util();
 	public static SignIn_Util signInPage = new SignIn_Util();
 
 	@BeforeClass
 	public void setUp() throws Exception {
-		homepage.setUp();
+		homepage.setUp("Sign In");
 	}
 
 	@Test(priority = 0)
@@ -128,10 +125,9 @@ public class SignInTestCases {
 //		if (testresult.getStatus() == ITestResult.FAILURE) {
 //			BaseUtils.common.cleanUpOnFailure();
 //		} else 
-			if (testresult.getStatus() == ITestResult.SUCCESS)
+		if (testresult.getStatus() == ITestResult.SUCCESS)
 			BaseUtils.common.cleanUpOnSuccess();
-		else if (testresult.getStatus() == ITestResult.SKIP)
-			BaseUtils.common.cleanUpOnSkip();
+		
 
 	}
 

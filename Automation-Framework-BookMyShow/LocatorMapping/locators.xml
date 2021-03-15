@@ -4,12 +4,29 @@
 
 	<element name="homepage-personalisedUpdates-alert" locator="//div[@class='wzrk-alert-heading']"/>	
 	<element name="homepage-NotNow-button" locator="//button[@id='wzrk-cancel']"/>
-		
+	<element name="homepage-CityList" locator="//span[@class='sc-jGxEUC jZgqTv']"/>
 	<element name="homepage-SelectCity" locator="//span[@class='sc-eEieub jpadjB'][contains(text(),'CITY')]"/>
+	<element name="homepage-SignIn-Button" locator="//div[@class='sc-fQejPQ jWuMjc']"/>	
+	<element name="homepage-Sports-Button" locator="//a[@class='sc-iGrrsa FYYCw'][contains(text(),'Sports')]"/>
+	<element name="homepage-Sports-Button1" locator="//div[@class='sc-bMVAic bOhLXm']"/>
+	<element name="homepage-Movies-Button" locator="//a[@class='sc-iGrrsa FYYCw'][contains(text(),'Movies')]"/>
 	
+	
+	<!-- Sports Module -->
+	<element name="Sports-ThisWeekened-Btn" locator="//div[@class='style__StyledText-sc-7o7nez-0 boewjJ'][contains(text(),'This Weekend')]"/>
+	<element name="Sports-ThisWeekened-Activated" locator="//div[@class='style__StyledText-sc-7o7nez-0 jWrgnm']"/>
+	<element name="Sports-ScrollTo-Element" locator="//div[@class='style__StyledText-sc-7o7nez-0 goTWqp']"/>
+	<element name="Sports-AllWeekendEvents" locator="//div[@class='styles__ListingsContainer-b1h692-7 gngoVD']//a"/>
+	
+	<!-- Movies Module -->
+														
+	<element name="Movies-Verifiable-Element" locator="//div[@class='styles__ListingsContainer-b1h692-8 jtStvP']//div[@class='commonStyles__DesktopOnlyContainer-sc-133848s-1 dZmsbV']"/>
+	<element name="Movies-AllLanguages" locator="//div[@class='commonStyles__VerticalFlexBox-sc-133848s-2 style__FilterBody-ije77g-1 hQrayI']"/>
+	<element name="Movies-Languages-FilterButton" locator="//div[@class='commonStyles__VerticalFlexBox-sc-133848s-2 style__FilterHeaderTitle-sc-1y4pbdw-8 brYXCX']"/>
+	<element name="Movies-getLanguages" locator="//div[@class='style__StyledText-sc-7o7nez-0 djMfle']"/>
 	
 	<!-- Sign In Module -->
-	<element name="homepage-SignIn-Button" locator="//div[@class='sc-fQejPQ jWuMjc']"/>
+	
 	<element name="SignIn-Get_Started" locator="//div[@class='sc-jKJlTe geqsna']"/>
 	<element name="SignIn-ContinueWithGoogle" locator="//div[contains(text(),'Continue with Google')]"/>
 	<element name="SignIn-Google" locator="//span[contains(text(),'Sign in')]"/>

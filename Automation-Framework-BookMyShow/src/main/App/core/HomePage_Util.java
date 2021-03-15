@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.xml.sax.SAXException;
 
-
 /**
  * 
  * @author Faiz Ahmed Siddiqh
@@ -12,9 +11,8 @@ import org.xml.sax.SAXException;
  */
 public class HomePage_Util {
 
-
-	public void setUp() throws SAXException, IOException {
-		BaseUtils.common.setClassName("Sign-In");
+	public void setUp(String className) throws SAXException, IOException {
+		BaseUtils.common.setClassName(className);
 		BaseUtils.testData.setTestFile("BookMyShow");
 		BaseUtils.setUp();
 	}
