@@ -96,7 +96,7 @@ public class SignInTestCases {
 		BaseUtils.captureScreenshot();
 		expectedErrorMessage = BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Error-Message"))
 				.getText();
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Expected Error message is displayed");
+		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Expected Error message is not displayed");
 
 		signInPage.returnToParentWindowAndCloseSignInPage();
 
@@ -127,7 +127,6 @@ public class SignInTestCases {
 //		} else 
 		if (testresult.getStatus() == ITestResult.SUCCESS)
 			BaseUtils.common.cleanUpOnSuccess();
-		
 
 	}
 

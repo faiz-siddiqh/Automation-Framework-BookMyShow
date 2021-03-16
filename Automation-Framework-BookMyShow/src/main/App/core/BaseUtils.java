@@ -6,10 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -413,14 +417,15 @@ public class BaseUtils {
 
 	public static void waitForThePageToLoad() {
 		try {
-//		WebDriverWait wait = new WebDriverWait(driver, 25);
-//
-//		wait.until(new ExpectedCondition<Boolean>() {
-//			public Boolean apply(WebDriver driver) {
-//				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-//			}
-//		});
-			driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+		WebDriverWait wait = new WebDriverWait(driver, 25);
+
+		wait.until(new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				common.logInfo("Waiting for page to Load Completely.");
+				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+			}
+		});
+			//driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
 
 		} catch (Exception e) {
 			common.logInfo("WebPage took more time to Load.");
@@ -684,7 +689,7 @@ public class BaseUtils {
 //			driver.quit();
 //			extentreport.endTest(test);
 //			extentreport.flush();
-			common.cleanUp();
+		common.cleanUp();
 		}
 
 	}
@@ -749,6 +754,7 @@ public class BaseUtils {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView();", element);
 			common.logInfo(" Scroll Down");
+			Thread.sleep(3000);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			common.logInfo("Unable to Scroll Down");
@@ -829,5 +835,17 @@ public class BaseUtils {
 		common.logInfo("Switching to parent window");
 
 	}
-
+	public static <K,V extends Comparable<? super V>>
+	SortedSet<Map.Entry<K,V>> sortByValue(Map<K,V> map) {
+	    SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
+	        new Comparator<Map.Entry<K,V>>() {
+	            @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
+	                int res = e1.getValue().compareTo(e2.getValue());
+	                return res != 0 ? res : 1;
+	            }
+	        }
+	    );
+	    sortedEntries.addAll(map.entrySet());
+	    return sortedEntries;
+	}
 }
