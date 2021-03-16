@@ -14,4 +14,9 @@
 			<class name="homepageTest.MoviesTestCases"></class>
 		</classes>
 	</test>
+	<test name="Sports Test" parallel="false">
+		<classes>
+			<class name="homepageTest.SportsTestCases"></class>
+		</classes>
+	</test>
 </suite>
