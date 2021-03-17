@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Regression TestSuite">
+	<test name="BookMyShowApp" parallel="false">
+
+		<packages>
+			<package name="homepageTest"></package>
+
+		</packages>
+
+	</test>
+
+</suite>

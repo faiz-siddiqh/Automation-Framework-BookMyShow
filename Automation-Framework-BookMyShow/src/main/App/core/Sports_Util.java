@@ -13,11 +13,75 @@ import org.openqa.selenium.WebElement;
 
 public class Sports_Util {
 
+	/**
+	 * Navigate to the Sports Page from the homepage of Bookmyshow
+	 */
 	public void navigateToSportsPage() {
 
 		BaseUtils.clickAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("homepage-Sports-Button")),
 				"Click And Wait on Sports Link-Btn");
 		BaseUtils.waitForThePageToLoad();
+
+	}
+
+	/**
+	 * Get All Events For this Weekend and Print the events to the Excel File
+	 */
+	public void getAllWeekendEvents() {
+		XSSFWorkbook excelBook = BaseUtils.testData.ExcelWBook;
+		XSSFSheet sheet = excelBook.getSheet("Results");
+		int count = 1;
+
+		Map<String, Integer> listOfEvents = new TreeMap<String, Integer>();
+
+		BaseUtils.scrollToView(200);
+
+		List<WebElement> list = BaseUtils.getElements(BaseUtils.locators.getLocator("Sports-NameOfTheEvent"), "xpath");
+		List<WebElement> priceList = BaseUtils.getElements(BaseUtils.locators.getLocator("Sports-PriceOfTheEvent"),
+				"xpath");
+
+		for (int i = 0; i < list.size(); i++) {
+
+			String nameOfTheEvent = list.get(i).getText();
+			String price = "";
+			Integer priceOfTheEvent = null;
+			price = priceList.get(count).getText();
+			count = count + 2;
+
+			if (price.contains("onwards")) {
+				price = price.replaceAll(" onwards", "");
+				priceOfTheEvent = Integer.parseInt(price.replaceAll("₹ ", ""));
+			} else {
+				priceOfTheEvent = Integer.parseInt(price.replaceAll("₹ ", ""));
+			}
+			listOfEvents.put(nameOfTheEvent, priceOfTheEvent);
+
+		}
+
+		Map<String, Integer> sortedList = entriesSortedByPrice(listOfEvents);
+		count = 1;
+		for (Map.Entry<String, Integer> pair : sortedList.entrySet()) {
+
+			XSSFRow row = sheet.createRow(count);
+			String nameOfTheEvent = pair.getKey();
+			Integer priceOfTheEvent = pair.getValue();
+			row.createCell(0).setCellValue(nameOfTheEvent);
+			row.createCell(1).setCellValue(priceOfTheEvent);
+			System.out.println(nameOfTheEvent + "       " + priceOfTheEvent);
+			count++;
+
+		}
+
+		try {
+			FileOutputStream fos = new FileOutputStream(BaseUtils.testData.filePath);
+			excelBook.write(fos);
+			fos.flush();
+			fos.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			BaseUtils.common.logInfo("Unable to find Testdata file");
+		}
 
 	}
 
@@ -27,7 +91,7 @@ public class Sports_Util {
 				"Click on this weekend filter btn");
 	}
 
-	public void getAllWeekendEvents() {
+	public void fetchAllWeekendEvents() {
 		List<WebElement> list = null;
 		XSSFWorkbook excelBook = BaseUtils.testData.ExcelWBook;
 		XSSFSheet sheet = excelBook.getSheet("Results");
@@ -38,6 +102,9 @@ public class Sports_Util {
 		Map<String, Integer> listOfEvents = new TreeMap<String, Integer>();
 		System.out.println("Name of the Event             Date of the Event               Price of the Event");
 		for (int i = 0; i < list.size(); i++) {
+			if (i == 0) {
+				continue;
+			}
 			BaseUtils.scrollToView(200);
 			BaseUtils.waitForTheElementToBeClickable(25, list.get(i));
 			BaseUtils.clickAndWait(list.get(i));
@@ -94,10 +161,17 @@ public class Sports_Util {
 
 	}
 
+	/**
+	 * Static Method with return type Map and extending comparator class which
+	 * compares values associated with two keys
+	 * 
+	 * @param <K>
+	 * @param <V>
+	 * @param map
+	 * @return sorted Map
+	 */
 	public <K, V extends Comparable<V>> Map<K, V> entriesSortedByPrice(final Map<K, V> map) {
-		// Static Method with return type Map and
-		// extending comparator class which compares values
-		// associated with two keys
+
 		Comparator<K> valueComparator = new Comparator<K>() {
 
 			// return comparison results of values of

@@ -22,7 +22,7 @@ public class MoviesTestCases {
 	}
 
 	@Test(priority = 0)
-	public void testIsMoviesButtonPresent_20010(Method method) {
+	public void testIsMoviesButtonPresent_20009(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 
 		Assert.assertTrue(
@@ -33,17 +33,20 @@ public class MoviesTestCases {
 	}
 
 	@Test(priority = 1)
-	public void checkIfMoviesButtonIsActive_20011(Method method) {
+	public void checkIfClearButtonIsActive_20010(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
-		moviespage.NavigateToMoviesPage();
 
-		Assert.assertTrue(BaseUtils.isElementPresent(BaseUtils.locators.getLocator("Movies-Verifiable-Element"),
-				"User is not on Movies Page"));
+		String languageToBeFiltered = BaseUtils.testData.getTestData("language");
+		moviespage.NavigateToMoviesPage();
+		moviespage.filterLanguage(languageToBeFiltered);
+
+		BaseUtils.clickAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("Movies-filterClear")),
+				"Click on Clear button");
 
 	}
 
 	@Test(priority = 1)
-	public void testIfLanguagesButtonIsActive_20012(Method method) {
+	public void testIfLanguagesButtonIsActive_20011(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		moviespage.NavigateToMoviesPage();
 
@@ -55,7 +58,7 @@ public class MoviesTestCases {
 	}
 
 	@Test(priority = 2)
-	public void testIfLanguagesAreDisplayed_20014(Method method) {
+	public void testIfLanguagesAreDisplayed_20012(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		moviespage.NavigateToMoviesPage();
 
@@ -65,7 +68,7 @@ public class MoviesTestCases {
 	}
 
 	@Test(priority = 3)
-	public void printListOfAllTheLanguages_20015(Method method) {
+	public void printListOfAllTheLanguages_20013(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		moviespage.printAllTheLanguages();
 

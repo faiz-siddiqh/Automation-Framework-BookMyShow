@@ -22,7 +22,7 @@ public class SignInTestCases {
 	}
 
 	@Test(priority = 0)
-	public void testSignInButton_20016(Method method) {
+	public void testSignInButton_20014(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		signInPage.signIn();
 		Assert.assertTrue(BaseUtils.isElementPresent(BaseUtils.locators.getLocator("SignIn-Get_Started"),
@@ -30,7 +30,7 @@ public class SignInTestCases {
 	}
 
 	@Test(priority = 1)
-	public void verifyIfContinueWithGoogleIsPresent_20017(Method method) {
+	public void verifyIfContinueWithGoogleIsPresent_20015(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		signInPage.signIn();
 		Assert.assertTrue(BaseUtils.isElementPresent(BaseUtils.locators.getLocator("SignIn-ContinueWithGoogle"),
@@ -38,8 +38,8 @@ public class SignInTestCases {
 
 	}
 
-	@Test(dependsOnMethods = { "verifyIfContinueWithGoogleIsPresent_20017" })
-	public void testContinueWithGoogleButton_20018(Method method) {
+	@Test(dependsOnMethods = { "verifyIfContinueWithGoogleIsPresent_20015" })
+	public void testContinueWithGoogleButton_20016(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		signInPage.signInWithGoogle();
 		signInPage.returnToParentWindowAndCloseSignInPage();
@@ -47,7 +47,7 @@ public class SignInTestCases {
 	}
 
 	@Test(enabled = false)
-	public void signInWithValidEmail_20019(Method method) {
+	public void signInWithValidEmail_20017(Method method) {
 
 		String email = BaseUtils.testData.getTestData("Email");
 		homepage.launchAndLoginWithCity(method.getName());
@@ -64,7 +64,7 @@ public class SignInTestCases {
 	}
 
 	@Test(enabled = false)
-	public void signInWithValidEmailAndInvalidPassword_20020(Method method) {
+	public void signInWithValidEmailAndInvalidPassword_20018(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		String actualErrorMessage = BaseUtils.locators.getLocator("SignIn-PasswordError-ActualMessage");
 		String expectedErrorMessage;
@@ -85,8 +85,8 @@ public class SignInTestCases {
 
 	}
 
-	@Test(dependsOnMethods = { "testContinueWithGoogleButton_20018" })
-	public void signInWithInValidEmail_20021(Method method) {
+	@Test(dependsOnMethods = { "testContinueWithGoogleButton_20016" })
+	public void signInWithInValidEmail_20019(Method method) {
 
 		homepage.launchAndLoginWithCity(method.getName());
 		String actualErrorMessage = BaseUtils.locators.getLocator("SignIn-Error-ActualMessage");
@@ -102,8 +102,8 @@ public class SignInTestCases {
 
 	}
 
-	@Test(dependsOnMethods = { "testContinueWithGoogleButton_20018", "signInWithInValidEmail_20021" })
-	public void produceErrorWhileSignInWithoutEmail_20022(Method method) {
+	@Test(dependsOnMethods = { "testContinueWithGoogleButton_20016", "signInWithInValidEmail_20019" })
+	public void produceErrorWhileSignInWithoutEmail_20020(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		String actualErrorMessage = BaseUtils.locators.getLocator("SignIn-Warning-ActualMessage");
 		String expectedErrorMessage;
@@ -122,10 +122,9 @@ public class SignInTestCases {
 
 	@AfterMethod
 	public void cleanUp(ITestResult testresult) throws Exception {
-//		if (testresult.getStatus() == ITestResult.FAILURE) {
-//			BaseUtils.common.cleanUpOnFailure();
-//		} else 
-		if (testresult.getStatus() == ITestResult.SUCCESS)
+		if (testresult.getStatus() == ITestResult.FAILURE) {
+			BaseUtils.common.cleanUpOnFailure();
+		} else if (testresult.getStatus() == ITestResult.SUCCESS)
 			BaseUtils.common.cleanUpOnSuccess();
 
 	}

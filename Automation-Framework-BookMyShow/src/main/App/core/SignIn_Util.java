@@ -4,6 +4,9 @@ import org.openqa.selenium.WebElement;
 
 public class SignIn_Util {
 
+	/**
+	 * Sign In to the signIn page
+	 */
 	public void signIn() {
 		BaseUtils.waitForTheElementToBeClickable(20,
 				BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("homepage-SignIn-Button")));
@@ -12,6 +15,9 @@ public class SignIn_Util {
 
 	}
 
+	/**
+	 * Navigate to the Get-Started page after clicking to sign In button
+	 */
 	public void signInWithGoogle() {
 		signIn();
 		BaseUtils.isElementPresent(BaseUtils.locators.getLocator("SignIn-Get_Started"), "Get Started Page is Opened");
@@ -31,6 +37,11 @@ public class SignIn_Util {
 
 	}
 
+	/**
+	 * Sign In using the Google with the email passed
+	 * 
+	 * @param email
+	 */
 	public void signInWithEmail(String email) {
 		signInWithGoogle();
 		BaseUtils.clickAndTypeAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Email")), email,
@@ -43,6 +54,9 @@ public class SignIn_Util {
 
 	}
 
+	/**
+	 * return to the homepage by closing the sign In window
+	 */
 	public void returnToParentWindowAndCloseSignInPage() {
 		BaseUtils.returnToParentHandle();
 		WebElement closeButton = BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Close-Btn"));

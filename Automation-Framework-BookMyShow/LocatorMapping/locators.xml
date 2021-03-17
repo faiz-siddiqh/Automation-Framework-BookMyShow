@@ -10,6 +10,7 @@
 	<element name="homepage-Sports-Button" locator="//a[@class='sc-iGrrsa FYYCw'][contains(text(),'Sports')]"/>
 	<element name="homepage-Sports-Button1" locator="//div[@class='sc-bMVAic bOhLXm']"/>
 	<element name="homepage-Movies-Button" locator="//a[@class='sc-iGrrsa FYYCw'][contains(text(),'Movies')]"/>
+	<element name="homepage-City-Btn" locator="//span[@class='sc-RcBXQ dTleyQ ellipsis']"/>
 	
 	
 	<!-- Sports Module -->
@@ -18,9 +19,16 @@
 	<element name="Sports-ScrollTo-Element" locator="//div[@class='style__StyledText-sc-7o7nez-0 goTWqp']"/>
 	<!--<element name="Sports-AllWeekendEvents" locator="//div[contains(@class,'styles__ListingsContainer')]//a"/>-->
 	<element name="Sports-AllWeekendEvents" locator="//div[@class='commonStyles__HorizontalFlexBox-sc-133848s-3 style__CardBody-dv5ht7-1 eFGyIh']"/>
+	<!--  
 	<element name="Sports-NameOfTheEvent" locator="//h1[@class='df-be df-bf df-bg df-bh df-bi']"/>
 	<element name="Sports-DateOfTheEvent" locator="//div[@class='df-ck']/div[@class='df-bg df-bj df-bk df-bl df-o']"/>
-	<element name="Sports-PriceOfTheEvent" locator="//div[@class='df-bj df-cu df-cv df-cw df-o']"/>
+	<element name="Sports-PriceOfTheEvent" locator="//div[@class='df-bj df-cu df-cv df-cw df-o']"/>-->
+	
+	
+	
+	<element name="Sports-NameOfTheEvent" locator="//div[@class='style__StyledText-sc-7o7nez-0 gBgfCW']"/>
+	<element name="Sports-DateOfTheEvent" locator="//div[@class='df-ck']/div[@class='df-bg df-bj df-bk df-bl df-o']"/>
+	<element name="Sports-PriceOfTheEvent" locator="//div[@class='style__StyledText-sc-7o7nez-0 btojmA']"/>
 	
 										
 	
@@ -30,6 +38,8 @@
 	<element name="Movies-AllLanguages" locator="//div[@class='commonStyles__VerticalFlexBox-sc-133848s-2 style__FilterBody-ije77g-1 hQrayI']"/>
 	<element name="Movies-Languages-FilterButton" locator="//div[@class='commonStyles__VerticalFlexBox-sc-133848s-2 style__FilterHeaderTitle-sc-1y4pbdw-8 brYXCX']"/>
 	<element name="Movies-getLanguages" locator="//div[@class='style__StyledText-sc-7o7nez-0 djMfle']"/>
+	<element name="Movies-filterLanguage" locator="//div[@class='style__StyledText-sc-7o7nez-0 boewjJ']"/>
+	<element name="Movies-filterClear" locator="//div[@class='commonStyles__VerticalFlexBox-sc-133848s-2 style__FilterHeader-sc-1y4pbdw-7 bWZfpU']//div[@class='commonStyles__DesktopOnlyContainer-sc-133848s-1 style__FilterHeaderCTA-sc-1y4pbdw-10 frMiDN'][contains(text(),'Clear')]"/>
 	
 	<!-- Sign In Module -->
 	
@@ -57,14 +67,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-
 
 
 

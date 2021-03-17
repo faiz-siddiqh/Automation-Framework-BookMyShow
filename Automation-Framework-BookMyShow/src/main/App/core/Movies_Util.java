@@ -11,6 +11,9 @@ import org.openqa.selenium.WebElement;
 
 public class Movies_Util {
 
+	/**
+	 * Navigate to the Movies Page
+	 */
 	public void NavigateToMoviesPage() {
 		WebElement element = BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("homepage-Movies-Button"));
 		BaseUtils.waitForTheElementToBeClickable(10, element);
@@ -18,6 +21,32 @@ public class Movies_Util {
 
 	}
 
+	/**
+	 * Select a specific language in the Filter Section
+	 * 
+	 * @param languageToBeFiltered-This is read from the testdata file
+	 */
+	public void filterLanguage(String languageToBeFiltered) {
+
+		List<WebElement> listOfMovies = BaseUtils.getElements(BaseUtils.locators.getLocator("Movies-filterLanguage"),
+				"xpath");
+
+		for (WebElement eachMovie : listOfMovies) {
+
+			String language = eachMovie.getText();
+			if (language.equalsIgnoreCase(languageToBeFiltered)) {
+				BaseUtils.clickAndWait(eachMovie);
+				return;
+			}
+
+		}
+
+	}
+
+	/**
+	 * Printing all the languages displayed in the movies page to the console as
+	 * well as to the Results sheet in excel file
+	 */
 	public void printAllTheLanguages() {
 
 		XSSFWorkbook excelBook = BaseUtils.testData.getExcelWorkBook();
@@ -38,6 +67,7 @@ public class Movies_Util {
 
 		}
 		try {
+			// Writing the data to the excel file
 			FileOutputStream fos = new FileOutputStream(filePath);
 			excelBook.write(fos);
 			fos.flush();
