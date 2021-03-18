@@ -67,7 +67,6 @@ public class Sports_Util {
 			Integer priceOfTheEvent = pair.getValue();
 			row.createCell(0).setCellValue(nameOfTheEvent);
 			row.createCell(1).setCellValue(priceOfTheEvent);
-			System.out.println(nameOfTheEvent + "       " + priceOfTheEvent);
 			count++;
 
 		}
