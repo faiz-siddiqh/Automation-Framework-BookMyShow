@@ -141,7 +141,7 @@ public class BaseUtils {
 				}
 
 				driver.get(url);
-				logInfo("Navigating to " + url);
+				logInfo("Navigating to -" + url);
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				waitForThePageToLoad();
 
