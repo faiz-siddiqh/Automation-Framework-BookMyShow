@@ -180,7 +180,7 @@ public class BaseUtils {
 			// if the extent report already exists delete.else create a new directory of
 			// that
 			// module
-			if (resultsFile.exists() && resultsFile.isDirectory()) {
+			if (resultsFile.exists()) {
 				resultsFile.delete();
 			}
 			resultsFile.mkdir();

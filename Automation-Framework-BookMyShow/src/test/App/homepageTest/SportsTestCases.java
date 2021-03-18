@@ -4,9 +4,12 @@ import java.lang.reflect.Method;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
+import org.testng.TestNG;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.reporters.jq.TestNgXmlPanel;
 
 import core.BaseUtils;
 import core.HomePage_Util;
