@@ -105,6 +105,12 @@
 						<plugin>
 							<artifactId>maven-clean-plugin</artifactId>
 							<version>3.1.0</version>
+							<configuration>
+								<suiteXmlFiles>
+									<suiteXmlFile>${project.basedir}//TestScripts//SmokeTesting.xml</suiteXmlFile><!-- 
+										xml suite file u want to run -->
+								</suiteXmlFiles>
+							</configuration>
 						</plugin>
 						<plugin>
 							<artifactId>maven-deploy-plugin</artifactId>
@@ -139,10 +145,10 @@
 								</suiteXmlFiles>
 							</configuration>
 						</plugin>
-						<plugin>
-							<artifactId>maven-resources-plugin</artifactId>
-							<version>3.0.2</version>
-						</plugin>
+<!-- 						<plugin> -->
+<!-- 							<artifactId>maven-resources-plugin</artifactId> -->
+<!-- 							<version>3.0.2</version> -->
+<!-- 						</plugin> -->
 						<plugin>
 							<artifactId>maven-compiler-plugin</artifactId>
 							<version>3.8.0</version>
@@ -160,12 +166,14 @@
 							<version>2.8.2</version>
 						</plugin>
 						<plugin>
-							<artifactId>maven-site-plugin</artifactId>
-							<version>3.7.1</version>
-						</plugin>
-						<plugin>
 							<artifactId>maven-clean-plugin</artifactId>
 							<version>3.1.0</version>
+							<configuration>
+								<suiteXmlFiles>
+									<suiteXmlFile>${project.basedir}//TestScripts//SmokeTesting.xml</suiteXmlFile><!-- 
+										xml suite file u want to run -->
+								</suiteXmlFiles>
+							</configuration>
 						</plugin>
 						<plugin>
 							<artifactId>maven-project-info-reports-plugin</artifactId>
