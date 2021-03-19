@@ -21,6 +21,13 @@ public class MoviesTestCases {
 		homepage.setUp("Movies");
 	}
 
+	/**
+	 * Testcase ID=20009 
+	 * TestCase Description: To verify if user is able to click on the movies from the
+	 * bookmyshow website.
+	 * 
+	 * @param method
+	 */
 	@Test(priority = 0)
 	public void testIsMoviesButtonPresent_20009(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
@@ -32,6 +39,13 @@ public class MoviesTestCases {
 
 	}
 
+	/**
+	 * Testcase ID=20010 
+	   TestCase Description: To verify if user is able to clear the language in filter
+	 * section
+	 * 
+	 * @param method
+	 */
 	@Test(priority = 1)
 	public void checkIfClearButtonIsActive_20010(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
@@ -45,7 +59,14 @@ public class MoviesTestCases {
 
 	}
 
-	@Test(priority = 1)
+	/**
+	 * Testcase ID=20011 
+	 * TestCase Description:To verify if user is able to click on the languages button
+	 * in the filters Section .
+	 * 
+	 * @param method
+	 */
+	@Test(priority = 2)
 	public void testIfLanguagesButtonIsActive_20011(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		moviespage.NavigateToMoviesPage();
@@ -57,7 +78,14 @@ public class MoviesTestCases {
 
 	}
 
-	@Test(priority = 2)
+	/**
+	 * Testcase ID=20012 
+	 * TestCase Description:To Check if all the languages of particular city are
+	 * displayed
+	 * 
+	 * @param method
+	 */
+	@Test(priority = 3)
 	public void testIfLanguagesAreDisplayed_20012(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		moviespage.NavigateToMoviesPage();
@@ -67,7 +95,14 @@ public class MoviesTestCases {
 
 	}
 
-	@Test(priority = 3)
+	/**
+	 * Testcase ID=20013 
+	 * TestCase Description:To print List of all the languages displayed for a
+	 * particular city
+	 * 
+	 * @param method
+	 */
+	@Test
 	public void printListOfAllTheLanguages_20013(Method method) {
 		homepage.launchAndLoginWithCity(method.getName());
 		moviespage.printAllTheLanguages();
