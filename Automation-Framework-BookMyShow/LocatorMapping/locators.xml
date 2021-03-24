@@ -14,22 +14,15 @@
 	
 	
 	<!-- Sports Module -->
+	
 	<element name="Sports-ThisWeekened-Btn" locator="//div[@class='style__StyledText-sc-7o7nez-0 boewjJ'][contains(text(),'This Weekend')]"/>
 	<element name="Sports-ThisWeekened-Activated" locator="//div[@class='style__StyledText-sc-7o7nez-0 jWrgnm']"/>
 	<element name="Sports-ScrollTo-Element" locator="//div[@class='style__StyledText-sc-7o7nez-0 goTWqp']"/>
 	<!--<element name="Sports-AllWeekendEvents" locator="//div[contains(@class,'styles__ListingsContainer')]//a"/>-->
-	<element name="Sports-AllWeekendEvents" locator="//div[@class='commonStyles__HorizontalFlexBox-sc-133848s-3 style__CardBody-dv5ht7-1 eFGyIh']"/>
-	<!--  
-	<element name="Sports-NameOfTheEvent" locator="//h1[@class='df-be df-bf df-bg df-bh df-bi']"/>
-	<element name="Sports-DateOfTheEvent" locator="//div[@class='df-ck']/div[@class='df-bg df-bj df-bk df-bl df-o']"/>
-	<element name="Sports-PriceOfTheEvent" locator="//div[@class='df-bj df-cu df-cv df-cw df-o']"/>-->
-	
-	
-	
+	<element name="Sports-AllWeekendEvents" locator="//div[@class='commonStyles__HorizontalFlexBox-sc-133848s-3 style__CardBody-dv5ht7-1 eFGyIh']"/>	
 	<element name="Sports-NameOfTheEvent" locator="//div[@class='style__StyledText-sc-7o7nez-0 gBgfCW']"/>
 	<element name="Sports-DateOfTheEvent" locator="//div[@class='df-ck']/div[@class='df-bg df-bj df-bk df-bl df-o']"/>
 	<element name="Sports-PriceOfTheEvent" locator="//div[@class='style__StyledText-sc-7o7nez-0 btojmA']"/>
-	
 										
 	
 	<!-- Movies Module -->

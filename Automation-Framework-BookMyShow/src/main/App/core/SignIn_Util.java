@@ -54,6 +54,27 @@ public class SignIn_Util {
 
 	}
 
+	public void signInWithEmailByEnteringCaptcha(String email) {
+		signInWithGoogle();
+		BaseUtils.clickAndTypeAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Email")), email,
+				"Enter email in the input field ");
+
+		try {
+			Thread.sleep(20000);
+
+			// Enter the captcha while sleep
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BaseUtils.clickAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Next-btn")),
+				"Click And Wait on Next button");
+//		BaseUtils.waitForTheElementToBePresent(10,
+//				BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Welcome-Page")),
+//				"Waiting for Welcome Page to Load");
+
+	}
+
 	/**
 	 * return to the homepage by closing the sign In window
 	 */

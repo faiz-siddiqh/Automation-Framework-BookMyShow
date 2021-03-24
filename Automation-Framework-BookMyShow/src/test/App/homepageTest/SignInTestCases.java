@@ -27,8 +27,8 @@ public class SignInTestCases {
 	}
 
 	/**
-	 * Testcase ID=20014 
-	 * TestCase Description:Verify if user is able to click on Sign In button-Link
+	 * Testcase ID=20014 TestCase Description:Verify if user is able to click on
+	 * Sign In button-Link
 	 * 
 	 * @param method
 	 */
@@ -41,8 +41,8 @@ public class SignInTestCases {
 	}
 
 	/**
-	 * Testcase ID=20015 
-	 * TestCase Description:Verify if  "Continue with Google" option is Present
+	 * Testcase ID=20015 TestCase Description:Verify if "Continue with Google"
+	 * option is Present
 	 * 
 	 * @param method
 	 */
@@ -56,8 +56,8 @@ public class SignInTestCases {
 	}
 
 	/**
-	 * Testcase ID=20016 
-	 * TestCase Description:Test the functionality of "Continue with Google" button
+	 * Testcase ID=20016 TestCase Description:Test the functionality of "Continue
+	 * with Google" button
 	 * 
 	 * @param method
 	 */
@@ -70,8 +70,7 @@ public class SignInTestCases {
 	}
 
 	/**
-	 * Testcase ID=20017 
-	 * TestCase Description:Try Sign In with Valid Email 
+	 * Testcase ID=20017 TestCase Description:Try Sign In with Valid Email
 	 * 
 	 * @param method
 	 */
@@ -80,7 +79,7 @@ public class SignInTestCases {
 
 		String email = BaseUtils.testData.getTestData("Email");
 		homepage.launchAndLoginWithCity(method.getName());
-		signInPage.signInWithEmail(email);
+		signInPage.signInWithEmailByEnteringCaptcha(email);
 
 //		Assert.assertTrue(BaseUtils.isElementPresent(BaseUtils.locators.getLocator("SignIn-Welcome-Page"),
 //				"User is on Welcome Page and cursor is on password field"), " Welcome Page is not Opened");
@@ -88,13 +87,14 @@ public class SignInTestCases {
 		 * The above result is not fetched while automating the browser.But in manual
 		 * Testing the above condition is satisfied.
 		 */
+
 		signInPage.returnToParentWindowAndCloseSignInPage();
 
 	}
 
 	/**
-	 * Testcase ID=20018 
-	 * TestCase Description:Try to Sign In with valid Email and Incorrect Password
+	 * Testcase ID=20018 TestCase Description:Try to Sign In with valid Email and
+	 * Incorrect Password
 	 * 
 	 * @param method
 	 */
@@ -106,7 +106,7 @@ public class SignInTestCases {
 		String email = BaseUtils.testData.getTestData("Email");
 		String password = BaseUtils.testData.getTestData("password");
 
-		signInPage.signInWithEmail(email);
+		signInPage.signInWithEmailByEnteringCaptcha(email);
 		BaseUtils.clickAndTypeAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Password")),
 				password, "Enter password in the input field ");
 		BaseUtils.clickAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Next-btn")),
@@ -121,8 +121,7 @@ public class SignInTestCases {
 	}
 
 	/**
-	 * Testcase ID=20019 
-	 * TestCase Description:Try Sign In with InValid Email
+	 * Testcase ID=20019 TestCase Description:Try Sign In with InValid Email
 	 * 
 	 * @param method
 	 */
@@ -144,8 +143,8 @@ public class SignInTestCases {
 	}
 
 	/**
-	 * Testcase ID=20020 
-	 * TestCase Description:Try to sign In without entering email and Verify error message is produced
+	 * Testcase ID=20020 TestCase Description:Try to sign In without entering email
+	 * and Verify error message is produced
 	 * 
 	 * @param method
 	 */

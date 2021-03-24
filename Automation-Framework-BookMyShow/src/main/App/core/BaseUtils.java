@@ -39,6 +39,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -536,11 +537,12 @@ public class BaseUtils {
 			}
 
 			// Set Options using for Firefox
-			FirefoxProfile profile = new FirefoxProfile();
-			FirefoxOptions options = new FirefoxOptions();
-			options.setProfile(profile);
 
-			driver = new FirefoxDriver();
+			org.openqa.selenium.firefox.ProfilesIni profile = new org.openqa.selenium.firefox.ProfilesIni();
+			FirefoxProfile Automationprofile = profile.getProfile("Automation");
+			FirefoxOptions options = new FirefoxOptions();
+			options.setProfile(Automationprofile);
+			driver = new FirefoxDriver(options);
 			common.logInfo("Launching Firefox");
 		}
 
