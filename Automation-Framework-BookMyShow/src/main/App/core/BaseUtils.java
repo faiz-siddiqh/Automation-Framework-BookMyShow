@@ -539,9 +539,9 @@ public class BaseUtils {
 			// Set Options using for Firefox
 
 			org.openqa.selenium.firefox.ProfilesIni profile = new org.openqa.selenium.firefox.ProfilesIni();
-			FirefoxProfile Automationprofile = profile.getProfile("Automation");
+//			FirefoxProfile Automationprofile = profile.getProfile("Automation");
 			FirefoxOptions options = new FirefoxOptions();
-			options.setProfile(Automationprofile);
+//			options.setProfile(Automationprofile);
 			driver = new FirefoxDriver(options);
 			common.logInfo("Launching Firefox");
 		}

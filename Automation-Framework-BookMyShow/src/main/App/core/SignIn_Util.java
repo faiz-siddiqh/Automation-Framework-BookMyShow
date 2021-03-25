@@ -58,6 +58,8 @@ public class SignIn_Util {
 		signInWithGoogle();
 		BaseUtils.clickAndTypeAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Email")), email,
 				"Enter email in the input field ");
+		BaseUtils.clickAndWait(BaseUtils.getElementByXpath(BaseUtils.locators.getLocator("SignIn-Next-btn")),
+				"Click And Wait on Next button");
 
 		try {
 			Thread.sleep(20000);
