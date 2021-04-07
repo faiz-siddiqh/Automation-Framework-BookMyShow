@@ -170,7 +170,7 @@
 							<version>3.1.0</version>
 							<configuration>
 								<suiteXmlFiles>
-									<suiteXmlFile>${project.basedir}//TestScripts//SmokeTesting.xml</suiteXmlFile><!-- 
+									<suiteXmlFile>${project.basedir}//TestScripts//RegressionSuite.xml</suiteXmlFile><!-- 
 										xml suite file u want to run -->
 								</suiteXmlFiles>
 							</configuration>
