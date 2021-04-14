@@ -1,7 +1,7 @@
 # Automation-Framework-BookMyShow
 This project involves automating  Bookmyshow web-application.
 
-##Installation
+## Installation
 
 Extract the zip folder and update to maven project and run the pom.xml or run profiles from cmd using maven commands . Requirements - JDK8 or higher version and maven 3.6.0 or higher version.
 
@@ -11,15 +11,15 @@ Extract the zip folder and update to maven project and run the pom.xml or run pr
 
 Some of the implemented tools are Selenium,TestNG,Extent reporting using relavantcodes api,APache POI ,maven ,junit etc.
 
-##RoadMap
+## RoadMap
 
 Creating a testSuite and carry out manual testing. SetUp Environment For Automation .Design and testing of Framework.
 
-##Authors and Contributors
+## Authors and Contributors
 
 *Faiz Ahmed Siddiqh K -Owner of this Test Framework,BaseUtils class & Author of SignIn module . 
 
-##Contribute
+## Contribute
 
 A lot of hard work,Planning and contribution .I would love to have your feedback and appreciation.
 
