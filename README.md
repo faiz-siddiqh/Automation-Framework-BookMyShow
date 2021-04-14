@@ -21,7 +21,7 @@ Creating a testSuite and carry out manual testing. SetUp Environment For Automat
 
 ## Contribute
 
-A lot of hard work,Planning and contribution .I would love to have your feedback and appreciation.
+A lot of hard work,Planning and manhours has been put for this development.I would love to have your feedback and appreciation.
 
 
 Kfasid@protonmail.com
