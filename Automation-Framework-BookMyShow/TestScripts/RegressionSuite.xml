@@ -1,11 +1,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Regression TestSuite">
-	<test name="BookMyShowApp" parallel="false">
+<suite name="Regression TestSuite"  >
+<listeners>
+		<listener class-name="core_utils.BaseUtils.Transformation" />
 
-		<packages>
-			<package name="homepageTest"></package>
+	</listeners>
+	<test name="BookMyShowApp">
 
-		</packages>
+		<!-- <packages> <package name="homepageTest"></package> </packages> -->
+		<classes>
+			<class name="homepageTest.MoviesTestCases"></class>
+			<class name="homepageTest.SportsTestCases"></class>
+			<class name="homepageTest.SignInTestCases"></class>
+		</classes>
 
 	</test>
 

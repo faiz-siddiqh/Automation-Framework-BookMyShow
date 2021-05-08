@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Regression TestSuite]">
+  <test thread-count="5" name="BookMyShowApp(failed)">
+    <classes>
+      <class name="homepageTest.MoviesTestCases">
+        <methods>
+          <include name="setUp"/>
+          <include name="checkIfClearButtonIsActive_20010" invocation-numbers="0"/>
+          <include name="testIfLanguagesButtonIsActive_20011"/>
+          <include name="testIfLanguagesAreDisplayed_20012"/>
+          <include name="cleanUp"/>
+        </methods>
+      </class> <!-- homepageTest.MoviesTestCases -->
+    </classes>
+  </test> <!-- BookMyShowApp(failed) -->
+</suite> <!-- Failed suite [Regression TestSuite] -->

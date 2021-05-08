@@ -1,9 +1,14 @@
 package core;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,19 +37,27 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.IAnnotationTransformer;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
+import org.testng.annotations.ITestAnnotation;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -66,6 +79,98 @@ public class BaseUtils {
 	public static String className;
 	public static String methodName;
 
+	public static class GlobalLibrary {
+
+		// Trigger Docker through Windows Batch File
+		public void initiateDocker() {
+
+			Runtime runtimeCmd = Runtime.getRuntime();
+			try {
+				runtimeCmd.exec("cmd /c start ExecutionFiles\\dockerUp.bat");
+				BufferedReader readLogs = new BufferedReader(new FileReader("logs.txt"));
+				String currentLine=readLogs.readLine();
+				
+				while(currentLine!=null) {
+					
+					if(currentLine.contains("The node is registered to the hub and ready to use")) {
+						break;
+					}
+					
+				}
+				
+
+			} catch (IOException e) {
+				System.out.println("Enable to initiate Docker");
+				e.printStackTrace();
+			}
+		}
+
+		public static void setUpDriver() {
+			String driverName = ProjectProperties.readFromGlobalConfigFile("driver");
+			String dockerHubURL = ProjectProperties.readFromGlobalConfigFile("DockerGridURL");
+
+			DesiredCapabilities cap = null;
+			URL url = null;
+			try {
+				url = new URL(dockerHubURL);
+			} catch (MalformedURLException e) {
+				System.out.println("Error Connecting to Grid");
+				e.printStackTrace();
+			}
+			if (driverName.contains("Chrome")) {
+				cap = DesiredCapabilities.chrome();
+			}
+			if (driverName.contains("Firefox")) {
+				cap = DesiredCapabilities.firefox();
+			}
+
+			driver = new RemoteWebDriver(url, cap);
+		}
+
+	}
+
+	/**
+	 * 
+	 * Class to handle adding of Custom Annotation From TestNG!!!Listner should be*
+	 * added to the.xml script file in TestScripts
+	 **/
+
+	public static class Transformation implements IAnnotationTransformer {
+
+		@Override
+		public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor,
+				Method testMethod) {
+			Class<? extends IRetryAnalyzer> retry = annotation.getRetryAnalyzerClass();
+			if (retry == null) {
+				annotation.setRetryAnalyzer(BaseUtils.RetryAfterFailure.class);
+			}
+
+		}
+	}
+
+	/**
+	 * Class to handle Retry of Failed Test Cases
+	 */
+	public class RetryAfterFailure implements IRetryAnalyzer {
+		private int counter = 0, retryCount = 1;
+
+		@Override
+		public boolean retry(ITestResult result) {
+			if (counter < retryCount) {
+				counter++;
+				return true;
+			}
+			return false;
+		}
+	}
+
+	/**
+	 * Class with methods related to fetching and Setting up of Properties of the
+	 * project
+	 * 
+	 * @author Faiz-Siddiqh
+	 *
+	 */
 	public static class ProjectProperties {
 
 		/**
@@ -519,9 +624,9 @@ public class BaseUtils {
 						System.getProperty("user.dir") + driverLocation.replaceAll(".exe", ""));
 			}
 			// Set Options using for chrome using the below commented line
-
-			// ChromeOptions options = new ChromeOptions();
-			driver = new ChromeDriver();
+			getChromeOptions();
+			ChromeOptions options = getChromeOptions();
+			driver = new ChromeDriver(options);
 			common.logInfo("Launching Chrome");
 
 		} else if (driverName.equalsIgnoreCase("FireFox")) {
@@ -550,6 +655,28 @@ public class BaseUtils {
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		common.logInfo("Maximizing the window");
 
+	}
+
+	/**
+	 * To return ChromeOptions with desired Capabilities as mentioned in
+	 * config.properties file
+	 * 
+	 * @return
+	 */
+	public static ChromeOptions getChromeOptions() {
+		String pageLoadStrategy = ProjectProperties.readFromGlobalConfigFile("PageLoadStrategy");
+		String browserState = ProjectProperties.readFromGlobalConfigFile("BrowserState");
+		ChromeOptions options = new ChromeOptions();
+		if (browserState.equalsIgnoreCase("headless"))
+			options.addArguments("--headless");
+		if (pageLoadStrategy.equalsIgnoreCase("Eager"))
+			options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+		else if (pageLoadStrategy.equalsIgnoreCase("Normal"))
+			options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+		else
+			options.setPageLoadStrategy(PageLoadStrategy.NONE);
+
+		return options;
 	}
 
 	/**
@@ -830,6 +957,7 @@ public class BaseUtils {
 	}
 
 	/**
+	 * Find Element in a List of WebElement and CLick on a Specified element
 	 * 
 	 * @param list
 	 * @param requiredText-Text to be clicked
