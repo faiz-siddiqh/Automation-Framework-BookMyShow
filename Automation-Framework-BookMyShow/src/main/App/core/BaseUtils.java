@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -54,6 +55,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.IAnnotationTransformer;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
@@ -79,32 +81,106 @@ public class BaseUtils {
 	public static String className;
 	public static String methodName;
 
+	/**
+	 * Global Library Class with Virtualisation Methods
+	 * 
+	 * @author Faiz-Siddiqh
+	 *
+	 */
 	public static class GlobalLibrary {
 
 		// Trigger Docker through Windows Batch File
-		public void initiateDocker() {
-
+		public static void triggerDocker(String command) {
+			String commandToBeExecuted;
+			String messageToBeSearchedInLogs;
+			String logFilePath = ProjectProperties.readFromGlobalConfigFile("DockerLogFile");
+			System.out.println(command);
 			Runtime runtimeCmd = Runtime.getRuntime();
+			if (command.contains("StartUp")) {
+				deleteAFile(logFilePath);
+				commandToBeExecuted = "cmd /c start cmd.exe /K \"cd ExecutionFiles && start dockerUp.bat\"";
+				messageToBeSearchedInLogs = "The node is registered to the hub and ready to use";
+			} else {
+				commandToBeExecuted = "cmd /c start cmd.exe /K \"cd ExecutionFiles && start dockerDown.bat\"";
+				messageToBeSearchedInLogs = "selenium-hub exited";
+			}
 			try {
-				runtimeCmd.exec("cmd /c start ExecutionFiles\\dockerUp.bat");
-				BufferedReader readLogs = new BufferedReader(new FileReader("logs.txt"));
-				String currentLine=readLogs.readLine();
-				
-				while(currentLine!=null) {
-					
-					if(currentLine.contains("The node is registered to the hub and ready to use")) {
+
+				runtimeCmd.exec(commandToBeExecuted);
+				boolean flag = false;
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.SECOND, 30);
+				long searchTime = cal.getTimeInMillis();
+				Thread.sleep(3000);
+				while (System.currentTimeMillis() < searchTime) {
+
+					if (flag) {
 						break;
 					}
-					
-				}
-				
 
-			} catch (IOException e) {
-				System.out.println("Enable to initiate Docker");
+					BufferedReader readLogs = new BufferedReader(new FileReader("ExecutionFiles//logs.txt"));
+					String currentLine = readLogs.readLine();
+					while (currentLine != null && !flag) {
+
+						if (currentLine.contains(messageToBeSearchedInLogs)) {
+							flag = true;
+							break;
+						}
+						currentLine = readLogs.readLine();
+
+					}
+					readLogs.close();
+
+				}
+				Assert.assertTrue(flag);// IF DOCKER IS NOT INSTANTIATED THEN THIS WILL FAIL
+
+			} catch (Exception e) {
+				System.out.println("Unable to initiate Docker");
 				e.printStackTrace();
 			}
 		}
 
+		/**
+		 * To delete a File
+		 * 
+		 * @param path -Path to the file within Project Directory
+		 * @return true if deleted else false
+		 */
+		public static boolean deleteAFile(String path) {
+
+			File fileToBeDeleted = new File(path);
+			if (fileToBeDeleted.exists()) {
+				System.out.println("Deleting File");
+				return fileToBeDeleted.delete();
+			}
+
+			return false;
+		}
+
+		/**
+		 * Scale Up Browser Instances On Grid
+		 */
+		public static void scaleUpBrowserInstances() {
+
+			Runtime runtimeCmd = Runtime.getRuntime();
+			try {
+
+				runtimeCmd.exec("cmd /c start cmd.exe /K \"cd ExecutionFiles && start dockerScale.bat\"");// Scaling up
+				// chrome
+				// instances
+				System.out.println("Increasing chrome instances");
+				Thread.sleep(10000); // waiting for the instances to be up and ready to use
+
+			} catch (Exception e) {
+				System.out.println("Unable to Scale Up Instances");
+				e.printStackTrace();
+			}
+
+		}
+
+		/**
+		 * Set up the Remote Grid Driver
+		 */
 		public static void setUpDriver() {
 			String driverName = ProjectProperties.readFromGlobalConfigFile("driver");
 			String dockerHubURL = ProjectProperties.readFromGlobalConfigFile("DockerGridURL");
@@ -217,6 +293,12 @@ public class BaseUtils {
 
 	}
 
+	/**
+	 * Class with common methods
+	 * 
+	 * @author Faiz-Siddiqh
+	 *
+	 */
 	public static class common {
 
 		/**
@@ -393,6 +475,12 @@ public class BaseUtils {
 
 	}
 
+	/**
+	 * Class dealing with Locators Setup and Mapping
+	 * 
+	 * @author Faiz-Siddiqh
+	 *
+	 */
 	public static class locators {
 		private static Document doc;
 		private static XPath xpath;
@@ -455,6 +543,12 @@ public class BaseUtils {
 
 	}
 
+	/**
+	 * Class with Testdata Operations methods
+	 * 
+	 * @author Faiz-Siddiqh
+	 *
+	 */
 	public static class testData {
 		public static XSSFWorkbook ExcelWBook;
 		private static XSSFSheet ExcelWSheet;
@@ -540,6 +634,12 @@ public class BaseUtils {
 
 	}
 
+	/**
+	 * class with Scrrenshot Handling
+	 * 
+	 * @author Faiz-Siddiqh
+	 *
+	 */
 	public static class Screenshot {
 
 		/**

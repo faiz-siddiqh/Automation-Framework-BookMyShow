@@ -5,7 +5,9 @@ import java.lang.reflect.Method;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import core.BaseUtils;
@@ -15,7 +17,14 @@ import core.Movies_Util;
 public class MoviesTestCases {
 	public static HomePage_Util homepage = new HomePage_Util();
 	public static Movies_Util moviespage = new Movies_Util();
-
+	
+	@BeforeSuite
+	public void InitiateDocker() {
+		BaseUtils.GlobalLibrary.triggerDocker("StartUp");
+		BaseUtils.GlobalLibrary.scaleUpBrowserInstances();
+		
+	}
+	
 	@BeforeClass
 	public void setUp() throws Exception {
 		homepage.setUp("Movies");
@@ -117,5 +126,11 @@ public class MoviesTestCases {
 			BaseUtils.common.cleanUpOnSuccess();
 
 	}
+	
+	@AfterSuite
+	public void shutdownDocker() {
+		BaseUtils.GlobalLibrary.triggerDocker("ShutDown");
+	}
+	
 
 }

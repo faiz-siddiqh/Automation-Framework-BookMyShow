@@ -1,16 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Regression TestSuite"  >
-<listeners>
+<!-- <listeners>
 		<listener class-name="core_utils.BaseUtils.Transformation" />
 
-	</listeners>
+	</listeners> -->
 	<test name="BookMyShowApp">
 
 		<!-- <packages> <package name="homepageTest"></package> </packages> -->
 		<classes>
-			<class name="homepageTest.MoviesTestCases"></class>
-			<class name="homepageTest.SportsTestCases"></class>
-			<class name="homepageTest.SignInTestCases"></class>
+			<class name="homepageTest.Test"></class>
 		</classes>
 
 	</test>

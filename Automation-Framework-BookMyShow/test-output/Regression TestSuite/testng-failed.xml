@@ -3,15 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Regression TestSuite]">
   <test thread-count="5" name="BookMyShowApp(failed)">
     <classes>
-      <class name="homepageTest.MoviesTestCases">
+      <class name="homepageTest.Test">
         <methods>
-          <include name="setUp"/>
-          <include name="checkIfClearButtonIsActive_20010" invocation-numbers="0"/>
-          <include name="testIfLanguagesButtonIsActive_20011"/>
-          <include name="testIfLanguagesAreDisplayed_20012"/>
-          <include name="cleanUp"/>
+          <include name="InitiateDocker"/>
+          <include name="shutdownDocker"/>
+          <include name="test"/>
         </methods>
-      </class> <!-- homepageTest.MoviesTestCases -->
+      </class> <!-- homepageTest.Test -->
     </classes>
   </test> <!-- BookMyShowApp(failed) -->
 </suite> <!-- Failed suite [Regression TestSuite] -->
